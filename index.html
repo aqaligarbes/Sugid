@@ -26,19 +26,11 @@ a{color:var(--blue)}
 .grid{display:grid;grid-template-columns:minmax(300px,560px) minmax(300px,420px);gap:26px;justify-content:center;align-items:start}
 @media(max-width:900px){.grid{grid-template-columns:1fr;max-width:540px;margin:0 auto}}
 .frame{width:min(100%,560px);min-width:0;justify-self:center;position:relative}
-.mapbox{position:relative;aspect-ratio:560/512;overflow:hidden;background:#777554}
+.mapbox{position:relative;aspect-ratio:768/1152;overflow:hidden}
 svg#map{width:100%;height:100%;display:block}
-.sealine{fill:none;stroke:#706448;stroke-opacity:.35;pointer-events:none}
-.mapbox .sealine:nth-child(2){stroke:#71533b;stroke-opacity:.48}
-.mapbox .sealine:nth-child(3){stroke:#684833;stroke-opacity:.58}
-.mapbox .sealine:nth-child(4){stroke:#583c2c;stroke-opacity:.72}
-.mapbox #wv path{stroke:#5d543b;stroke-opacity:.22}
-.mapbox svg rect{opacity:.55}
-.land{fill:#f1e2b8;stroke:#3d2c20;stroke-linejoin:round}
 .pin{cursor:pointer;outline:none}
-.pin .dot{fill:#963527;stroke:#f6ecd2;transition:fill .2s;filter:drop-shadow(1px 2px 1px rgba(45,30,20,.55))}.pin:hover .dot,.pin:focus-visible .dot{fill:#b9741f}
-.pin .num{fill:#f6ecd2;font-family:var(--f);font-weight:700;text-anchor:middle;pointer-events:none}
-.lbl{font-family:var(--f);font-style:italic;font-weight:700;fill:#8e2f24;paint-order:stroke;stroke:#f2e3b6;stroke-linejoin:round;cursor:pointer}
+.pin rect{fill:transparent;stroke:transparent;stroke-width:3}
+.pin:hover rect,.pin:focus-visible rect{stroke:#963527;stroke-dasharray:4 3}
 .compass,.note{display:none}
 .compass{position:absolute;right:8px;bottom:8px;width:92px;z-index:2;opacity:.9}
 .note{position:absolute;left:10px;bottom:8px;font-size:.78rem;font-style:italic;z-index:2;background:rgba(243,230,196,.8);padding:0 6px}
@@ -97,10 +89,9 @@ body::before{box-shadow:none}
   <div class="cart"><h1>SUGID</h1><p>Ang istorya sang kada lugar: a literary map of Negros Occidental</p></div>
   <div class="grid">
     <div class="frame"><div class="mapbox">
-      <svg id="map" viewBox="0 0 560 760" role="group" aria-label="Schematic map of Negros Occidental with five places">
-        <defs><pattern id="wv" width="46" height="34" patternUnits="userSpaceOnUse"><path d="M6 12q5-6 10 0t10 0" fill="none" stroke="#6b4a35" stroke-opacity=".45" stroke-width="1.1"/><path d="M26 28q5-6 10 0t10 0" fill="none" stroke="#6b4a35" stroke-opacity=".35" stroke-width="1"/></pattern></defs>
-        <rect x="-600" y="-600" width="1800" height="2000" fill="url(#wv)"/>
-        <g id="rings"></g><path id="land" class="land"></path><g id="mts"></g><g id="pins"></g>
+      <svg id="map" viewBox="0 0 768 1152" role="group" aria-label="Map of Negros Occidental with five interactive places">
+        <image href="assets/negros-full-map.png" x="0" y="0" width="768" height="1152" pointer-events="none"/>
+        <g id="pins"></g>
       </svg>
       <svg class="compass" viewBox="-60 -60 120 120" aria-hidden="true"><g fill="#3a281c" stroke="#3a281c" stroke-width=".8"><path d="M0-52L7-7 52 0 7 7 0 52-7 7-52 0-7-7Z" fill="#f3e6c4"/><path d="M0-52L7-7 0 0Z M52 0L7 7 0 0Z M0 52L-7 7 0 0Z M-52 0L-7-7 0 0Z"/><path d="M0-34L4-4 34 0 4 4 0 34-4 4-34 0-4-4Z" transform="rotate(45)" fill="#f3e6c4"/><circle r="38" fill="none"/><circle r="3" fill="#8e2f24"/></g><text y="-56" text-anchor="middle" font-family="IM Fell English SC,serif" font-size="13" fill="#3a281c">N</text></svg>
       <span class="note">Schematic chart, not to scale</span>
@@ -190,26 +181,17 @@ const PLACES=[
 const SOURCES={S01:["Silay City Government: About Silay","https://silaycity.gov.ph/about.html"],S02:["Talisay City Government: History","https://talisaycity.gov.ph/history-talisay-city-negros-occidental"],S03:["Bago City Government: The Birth of Bago","https://bagocity.gov.ph/about-bago-city/"],S04:["Wikipedia: Bacolod","https://en.wikipedia.org/wiki/Bacolod"],S05:["Wikipedia: Magsungay, Bacolod","https://en.wikipedia.org/wiki/Magsungay,_Bacolod"],S06:["Wikipedia: Granada, Bacolod","https://en.wikipedia.org/wiki/Granada,_Bacolod"],S08:["Wikipedia: Murcia, Negros Occidental","https://en.wikipedia.org/wiki/Murcia,_Negros_Occidental"],S09:["Wikipedia: Bago, Negros Occidental","https://en.wikipedia.org/wiki/Bago,_Negros_Occidental"],S10:["Wikipedia: Silay","https://en.wikipedia.org/wiki/Silay"],S12:["Wikipedia: The Ruins (mansion)","https://en.wikipedia.org/wiki/The_Ruins_(mansion)"],S13:["Filipinas Heritage Library: Silay Church record","https://www.filipinaslibrary.org.ph/biblio/7322"],S14:["Filipinas Heritage Library: Bago City Hall record","https://www.filipinaslibrary.org.ph/biblio/18277"],S15:["Negros Season of Culture: San Nicolas de Tolentino, Talisay","https://www.negrosseasonofculture.com/2021/05/sannicolas.html"],S16:["Silay Heritage: The Legend of Kansilay","https://www.silayheritage.com/2011/11/where-silay-got-its-name-legend-of.html"],S17:["SunStar: Kansilay street dance drama","https://www.sunstar.com.ph/more-articles/kansilay-street-dance-drama"],S19:["UP Diliman Repository: The Lost Martina (1929)","https://repository.mainlib.upd.edu.ph/omekas/s/rare-periodicals/media/172461"],S20:["Project Gutenberg: Philippine Folklore Stories (1904)","https://www.gutenberg.org/cache/epub/10771/pg10771.html"],S21:["Sacred Texts: The Tobacco of Harisaboqued","https://sacred-texts.com/asia/pfs/pfs03.htm"],S22:["NCCA: Hiligaynon Literature","https://ncca.gov.ph/about-ncca-3/subcommissions/subcommission-on-the-arts-sca/literary-arts/hiligaynon-literature/"],S24:["Literaturang Hiligaynon: Mga Manunulat","http://literaturanghiligaynon.blogspot.com/p/mga-manunulat.html"],S27:["UP Library: In the Womb of the Earth (2020)","https://ds.mainlib.upd.edu.ph/Record/UP-99946688290084922"],S28:["Philstar Freeman: Palanca Hall of Fame (2014)","https://www.philstar.com/the-freeman/cebu-lifestyle/2014/11/30/1397480/literary-artists-installed-palanca-awards-hall-fame"],S31:["Bluprint: Lacson Mansion ruins","https://bluprint-onemega.com/architecture/heritage/lacson-mansion-ruins-talisay/"],S32:["Tribune: Taj Mahal of Negros Occidental","https://tribune.net.ph/2023/05/20/taj-mahal-of-negros-occidental"],S33:["Wikipedia: Mambukal","https://en.wikipedia.org/wiki/Mambukal"],S34:["Pinoy Mountaineer: Mt. Kanlaon","https://www.pinoymountaineer.com/?p=1273"],S37:["Wiktionary: Bacolod","https://en.wiktionary.com/wiki/Bacolod"],S39:["COA: Murcia Executive Summary 2021 (PDF)","https://www.coa.gov.ph/download/5408/negros-occidental/71164/murcia-executive-summary-2021.pdf"]};
 
 /* ===== MAP ===== */
-const OUT=[[123.50,10.84],[123.35,10.60],[123.15,10.42],[123.00,10.25],[122.85,9.95],[122.70,9.70],[122.55,9.45],[122.47,9.40],[122.40,9.60],[122.42,9.75],[122.60,9.95],[122.80,10.05],[122.87,10.25],[122.85,10.45],[122.82,10.55],[122.92,10.62],[122.97,10.75],[123.00,10.85],[123.10,10.95],[123.25,10.98],[123.40,10.95]];
-const W=560,H=512,SC=430,LON0=122.30,TOP=11.05,NS="http://www.w3.org/2000/svg";
-const px=lo=>(lo-LON0)*SC+20,py=la=>(TOP-la)*SC+60;
-function smooth(p,n){for(let k=0;k<n;k++){const q=[];for(let i=0;i<p.length;i++){const a=p[i],b=p[(i+1)%p.length];q.push([.75*a[0]+.25*b[0],.75*a[1]+.25*b[1]],[.25*a[0]+.75*b[0],.25*a[1]+.75*b[1]]);}p=q;}return p;}
+const W=768,H=1152,NS="http://www.w3.org/2000/svg";
+const MARKERS={silay:[462,326],talisay:[428,384],bacolod:[363,454],murcia:[533,459],bago:[353,545]};
 const svg=document.getElementById("map"),$=id=>document.getElementById(id);
-const dd="M"+smooth(OUT,3).map(([lo,la])=>px(lo).toFixed(1)+","+py(la).toFixed(1)).join("L")+"Z";
-$("land").setAttribute("d",dd);
-[24,17,11,6].forEach(w=>{const r=document.createElementNS(NS,"path");r.setAttribute("d",dd);r.setAttribute("class","sealine");r.setAttribute("stroke-width",w*2);r.setAttribute("stroke-linejoin","round");$("rings").appendChild(r);});
-[[123.20,10.50],[123.12,10.38],[123.05,10.26],[122.96,10.12],[122.88,9.98],[122.80,9.84],[122.73,9.72],[122.66,9.60]].forEach(([lo,la])=>{const x=px(lo),y=py(la),m=document.createElementNS(NS,"path");m.setAttribute("d",`M${x-10},${y}L${x},${y-15}L${x+10},${y}Z M${x},${y-15}L${x+3},${y}`);m.setAttribute("fill","#f6ecd2");m.setAttribute("stroke","#6b4a35");m.setAttribute("stroke-width","1.3");$("mts").appendChild(m);});
 PLACES.forEach(p=>{const g=document.createElementNS(NS,"g");g.setAttribute("class","pin");g.setAttribute("tabindex","0");g.setAttribute("role","button");g.setAttribute("aria-label",p.name);
-  g.innerHTML='<circle class="dot"/><text class="num"></text><text class="lbl"></text>';p._g=g;$("pins").appendChild(g);
+  g.innerHTML='<rect rx="8"></rect>';p._g=g;$("pins").appendChild(g);
   g.onclick=()=>openPlace(p.id);g.onkeydown=e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();openPlace(p.id);}};});
-let vb={x:0,y:30,w:W,h:H};
+let vb={x:0,y:0,w:W,h:H};
 function setVB(v){vb=v;svg.setAttribute("viewBox",`${v.x} ${v.y} ${v.w} ${v.h}`);const k=v.w/W;
-  PLACES.forEach(p=>{const[d,n,t]=p._g.children,x=px(p.lon),y=py(p.lat),r=11*k;
-   d.setAttribute("cx",x);d.setAttribute("cy",y);d.setAttribute("r",r);d.setAttribute("stroke-width",2*k);
-   n.textContent=p.n;n.setAttribute("x",x);n.setAttribute("y",y+4*k);n.setAttribute("font-size",13*k);
-   t.textContent=p.name;t.setAttribute("font-size",19*k);t.setAttribute("stroke-width",4*k);
-   t.setAttribute("x",p.side==="L"?x-r-6*k:x+r+6*k);t.setAttribute("y",y+5*k);t.setAttribute("text-anchor",p.side==="L"?"end":"start");});
-  $("land").setAttribute("stroke-width",3.2*k);}
+  PLACES.forEach(p=>{const[hit]=p._g.children,[x,y]=MARKERS[p.id],size=48*k;
+   hit.setAttribute("x",x-size/2);hit.setAttribute("y",y-size/2);
+   hit.setAttribute("width",size);hit.setAttribute("height",size);});}
 const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;let raf=0;
 function fly(t,done){cancelAnimationFrame(raf);const s={...vb},t0=performance.now(),dur=reduce?0:800;
   (function f(now){const k=dur?Math.min(1,(now-t0)/dur):1,e=k<.5?2*k*k:1-Math.pow(-2*k+2,2)/2;
@@ -238,7 +220,7 @@ function read(i){const t=cur.texts[i];
   $("reader").innerHTML=`<h2>${t.title}</h2><p class="by">${t.by}</p><div class="rights"><span class="kind ${t.kind==="Link only"?"legend":""}">${t.kind}</span>${t.rights}</div><div class="txt">${t.body.map(x=>`<p>${x}</p>`).join("")}</div><h3>Read more</h3><ul class="s">${t.links.map(l=>`<li><a href="${l[1]}" target="_blank" rel="noopener">${l[0]}</a></li>`).join("")}</ul>`;
   $("reader").scrollTop=0;}
 let open=false;
-function pinCenter(p){const r=p._g.querySelector(".dot").getBoundingClientRect();return[r.left+r.width/2,r.top+r.height/2];}
+function pinCenter(p){const r=p._g.querySelector("rect").getBoundingClientRect();return[r.left+r.width/2,r.top+r.height/2];}
 function openPlace(id,instant){
   const p=PLACES.find(x=>x.id===id);if(!p)return;
   if(location.hash!=="#"+id)history.pushState(null,"","#"+id);
@@ -246,16 +228,16 @@ function openPlace(id,instant){
     if(!instant&&!reduce&&page.animate)page.animate([{clipPath:`circle(0px at ${x}px ${y}px)`},{clipPath:`circle(160vmax at ${x}px ${y}px)`}],{duration:950,easing:"cubic-bezier(.5,0,.3,1)"});
     $("pname").focus({preventScroll:true});};
   if(instant||open){show(innerWidth/2,innerHeight/2);return;}
-  const w=140,h=w*H/W;fly({x:px(p.lon)-w/2,y:py(p.lat)-h/2,w,h},()=>{const[x,y]=pinCenter(p);show(x,y);});
+  const w=140,h=w*H/W,[x,y]=MARKERS[p.id];fly({x:x-w/2,y:y-h/2,w,h},()=>{const[x,y]=pinCenter(p);show(x,y);});
 }
 function closePlace(){if(!open)return;const x=innerWidth/2,y=innerHeight/2;
-  const fin=()=>{page.hidden=true;open=false;document.title="SUGID: Ang istorya sang kada lugar";fly({x:0,y:30,w:W,h:H});};
+  const fin=()=>{page.hidden=true;open=false;document.title="SUGID: Ang istorya sang kada lugar";fly({x:0,y:0,w:W,h:H});};
   if(!reduce&&page.animate){const a=page.animate([{clipPath:`circle(160vmax at ${x}px ${y}px)`},{clipPath:`circle(0px at ${x}px ${y}px)`}],{duration:600,easing:"ease-in"});a.onfinish=fin;}else fin();}
 $("close").onclick=()=>{if(location.hash)history.pushState(null,"",location.pathname+location.search);closePlace();};
 addEventListener("hashchange",()=>{const id=location.hash.slice(1);if(id)openPlace(id,open);else closePlace();});
 addEventListener("keydown",e=>{if(e.key==="Escape"&&open)$("close").click();});
 setVB(vb);
-if(location.hash){const id=location.hash.slice(1);if(PLACES.some(p=>p.id===id)){const w=140,h=w*H/W,p=PLACES.find(p=>p.id===id);setVB({x:px(p.lon)-w/2,y:py(p.lat)-h/2,w,h});openPlace(id,true);}}
+if(location.hash){const id=location.hash.slice(1);if(PLACES.some(p=>p.id===id)){const w=140,h=w*H/W,[x,y]=MARKERS[id];setVB({x:x-w/2,y:y-h/2,w,h});openPlace(id,true);}}
 </script>
 </body>
 </html>
