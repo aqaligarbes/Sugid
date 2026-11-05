@@ -70,7 +70,7 @@ aside.side p{margin:0 0 12px}
 .page-kicker{margin:0 0 5px;color:var(--umber);font-family:var(--sc);font-size:.82rem;letter-spacing:.1em;text-transform:uppercase}
 .page-content h2{font-size:clamp(1.55rem,3vw,2.15rem);margin:0 0 12px;color:var(--red)}
 .page-content p{margin:0 0 .85em;max-width:62ch}
-.page-content .page-verse{white-space:pre-line;font-family:var(--serif,Georgia,serif);line-height:1.5}
+.page-content .page-verse{white-space:pre-line;overflow-wrap:anywhere;font-family:var(--serif,Georgia,serif);line-height:1.5}
 .page-entry{margin:0 0 16px}
 .page-entry h3{margin:0 0 5px;color:var(--ink);font-family:var(--sc);font-size:1.15rem}
 .page-content .kind{display:inline-block;font-size:.78rem;font-family:var(--sc);border:1px solid var(--umber);padding:2px 9px;border-radius:12px;margin:0 0 12px;color:var(--umber)}
@@ -78,8 +78,7 @@ aside.side p{margin:0 0 12px}
 .page-list,.page-sources{margin:8px 0 14px;padding-left:20px}
 .page-list li,.page-sources li{margin:0 0 8px}
 .page-sources{font-size:.92rem}
-.page-sources a{color:var(--blue)}
-.page-sources a{overflow-wrap:anywhere}
+.page-sources a{color:var(--blue);overflow-wrap:anywhere}
 #page.other-works #pname{font-size:clamp(1.55rem,3.8vw,2.6rem);letter-spacing:0;max-width:25ch}
 .page-note{margin-top:16px;padding:9px 12px;border-left:3px solid var(--gold);background:rgba(255,246,220,.7);font-size:.9rem}
 .folio{position:absolute;right:22px;bottom:14px;color:var(--umber);font-size:.82rem}
@@ -115,7 +114,7 @@ body::before{box-shadow:none}
 <section id="page" hidden aria-label="Place page">
   <div class="bar"><button class="btn" id="close" type="button">Back to the map</button><div class="turner" role="group" aria-label="Book pages"><button class="btn" id="prev-page" type="button">&#8592; Previous</button><span id="page-count" aria-live="polite"></span><button class="btn" id="next-page" type="button">Next &#8594;</button></div><a class="btn" href="sources/SUGID_Negros_Occidental_Literary_and_Folklore_Sourcebook.pdf" target="_blank" rel="noopener">Sourcebook PDF</a><a class="btn" id="writers-pdf" href="sources/SUGID_Negros_Writers_Full_Text_and_Source_Compilation.pdf" target="_blank" rel="noopener" hidden>Writers compilation PDF</a><nav id="chips" aria-label="Books"></nav></div>
   <div class="book">
-    <article class="leaf l"><p class="book-series">SUGID | CITY FIELD NOTES</p><h1 id="pname" tabindex="-1"></h1><p class="tag" id="ptag"></p><div class="rule"></div><div class="page-content" id="left-page"></div><span class="folio" id="left-folio"></span></article>
+    <article class="leaf l"><p class="book-series" id="book-series">SUGID | CITY FIELD NOTES</p><h1 id="pname" tabindex="-1"></h1><p class="tag" id="ptag"></p><div class="rule"></div><div class="page-content" id="left-page"></div><span class="folio" id="left-folio"></span></article>
     <article class="leaf r"><div class="page-content" id="right-page"></div><span class="folio" id="right-folio"></span></article>
   </div>
 </section>
@@ -231,6 +230,7 @@ function turnPage(direction){
 }
 function build(p){
   page.classList.remove("other-works");
+  $("book-series").textContent="SUGID | CITY FIELD NOTES";
   cur=p;$("pname").textContent=p.name;$("ptag").textContent=p.tagline;document.title=p.name+" | SUGID";
   setBookNavigation(p.id);
   $("writers-pdf").hidden=true;
@@ -240,6 +240,7 @@ function build(p){
 }
 function buildOtherWorks(){
   page.classList.add("other-works");
+  $("book-series").textContent="SUGID | NEGROS OCCIDENTAL WRITERS";
   cur={id:"other-works",name:"Works of Authors From Other Cities/Municipalities in Negros Occidental",tagline:"A companion collection of writers, texts, and reading links",_spreads:window.OTHER_CITY_WORKS.spreads};
   $("pname").textContent=cur.name;$("ptag").textContent=cur.tagline;document.title=cur.name+" | SUGID";
   setBookNavigation(cur.id);
