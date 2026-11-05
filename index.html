@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>SUGID: Ang istorya sang kada lugar</title>
+<title>SUGID: Ang Istorya Sang Kada Lugar</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=IM+Fell+English+SC&display=swap" rel="stylesheet">
 <style>
@@ -20,38 +20,38 @@ a{color:var(--blue)}
 .btn:hover{background:#fff6dc}
 /* map screen */
 #home{padding:16px clamp(14px,4vw,44px) 40px}
-.cart{margin:0 auto 18px;max-width:640px;text-align:center;padding:10px 18px 12px;border:5px double var(--umber);border-radius:14px;background:rgba(243,230,196,.82);box-shadow:0 4px 14px rgba(58,40,28,.3)}
-.cart h1{font-size:clamp(2.2rem,6vw,3.6rem);letter-spacing:.12em}
-.cart p{margin:2px 0 0;font-style:italic;color:var(--umber)}
+.cart{margin:0 auto 18px;max-width:700px;text-align:center;padding:12px 20px 14px;border:5px double var(--umber);border-radius:14px;background:rgba(243,230,196,.94);box-shadow:0 4px 14px rgba(58,40,28,.3)}
+.cart h1{font-size:clamp(2.2rem,6vw,3.6rem);letter-spacing:.12em;color:var(--red)}
+.cart p{margin:4px 0 0;font-style:italic;color:var(--umber)}
+.cart .app-description{max-width:48rem;margin:7px auto 0;color:var(--ink);font-size:.96rem;font-style:normal}
 .grid{display:grid;grid-template-columns:minmax(300px,560px) minmax(300px,420px);gap:26px;justify-content:center;align-items:start}
 @media(max-width:900px){.grid{grid-template-columns:1fr;max-width:540px;margin:0 auto}}
-.frame{width:min(100%,560px);min-width:0;justify-self:center;position:relative}
-.mapbox{position:relative;aspect-ratio:768/1152;overflow:hidden}
+.frame{width:min(100%,560px);min-width:0;justify-self:center;position:relative;padding:7px;border:1px solid var(--gold);background:var(--paper);box-shadow:0 12px 30px rgba(40,24,10,.36)}
+.mapbox{position:relative;aspect-ratio:768/1152;overflow:hidden;border:1px solid rgba(107,74,53,.45)}
 svg#map{width:100%;height:100%;display:block}
 .pin{cursor:pointer;outline:none}
-.pin rect{fill:transparent;stroke:transparent;stroke-width:3}
-.pin:hover rect,.pin:focus-visible rect{stroke:#963527;stroke-dasharray:4 3}
+.pin rect{fill:transparent;stroke:transparent;stroke-width:2}
+.pin:hover rect,.pin:focus-visible rect{fill:rgba(142,47,36,.08);stroke:#963527}
 .compass,.note{display:none}
 .compass{position:absolute;right:8px;bottom:8px;width:92px;z-index:2;opacity:.9}
 .note{position:absolute;left:10px;bottom:8px;font-size:.78rem;font-style:italic;z-index:2;background:rgba(243,230,196,.8);padding:0 6px}
-aside.side{background:var(--tex) var(--paper);background-blend-mode:multiply;border:1.5px solid var(--umber);padding:22px 22px 18px;box-shadow:0 10px 26px rgba(40,24,10,.4);position:relative}
-aside.side h2{font-size:1.7rem;margin-bottom:4px}
+aside.side{background:var(--tex) var(--paper);background-blend-mode:multiply;border:3px double var(--umber);border-radius:5px;padding:22px 22px 18px;box-shadow:0 10px 26px rgba(40,24,10,.3);position:relative}
+aside.side h2{font-size:1.7rem;margin-bottom:4px;color:var(--red)}
 aside.side p{margin:0 0 12px}
 .plist{list-style:none;margin:14px 0 0;padding:0;display:grid;gap:9px}
-.plist button{width:100%;display:flex;gap:12px;text-align:left;align-items:center;padding:9px 12px;background:rgba(255,246,220,.6);border:1px solid var(--gold);border-radius:3px}
-.plist button:hover{border-color:var(--red);background:#fff6dc}
+.plist button{width:100%;display:flex;gap:12px;text-align:left;align-items:center;padding:9px 12px;background:rgba(255,246,220,.82);border:1px solid var(--gold);border-radius:4px;transition:background .2s,border-color .2s,transform .2s,box-shadow .2s}
+.plist button:hover{border-color:var(--red);background:#fff6dc;transform:translateY(-1px);box-shadow:0 3px 8px rgba(58,40,28,.14)}
 .seal{flex:none;width:34px;height:34px;border-radius:50%;background:var(--red);color:#f6ecd2;display:grid;place-items:center;font-weight:700;border:2px solid #f6ecd2;box-shadow:0 0 0 1.5px var(--red),1px 2px 3px rgba(0,0,0,.4)}
 .plist b{font-family:var(--sc);font-weight:400;font-size:1.25rem;display:block;line-height:1.1}
 .plist small{color:var(--umber);font-size:.95rem}
-.foot{max-width:900px;margin:22px auto 0;text-align:center;font-size:.9rem;color:var(--umber);font-style:italic}
 /* place page */
-#page{position:fixed;inset:0;z-index:20;overflow:auto;background:var(--tex) center/cover #d9c48f}
+#page{position:fixed;inset:0;z-index:20;overflow:auto;background:linear-gradient(rgba(65,83,79,.3),rgba(65,83,79,.3)),var(--tex) center/cover #d9c48f}
 #page[hidden]{display:none}
-.bar{position:sticky;top:0;z-index:5;display:flex;gap:10px;align-items:center;flex-wrap:wrap;padding:10px clamp(12px,3vw,34px);background:rgba(58,40,28,.92);color:#f3e6c4;border-bottom:3px double var(--gold)}
+.bar{position:sticky;top:0;z-index:5;display:flex;gap:10px;align-items:center;flex-wrap:wrap;padding:10px clamp(12px,3vw,34px);background:rgba(55,75,72,.96);color:#f3e6c4;border-bottom:3px double var(--gold)}
 .bar .btn{color:var(--ink)}
 .bar nav{display:flex;gap:6px;flex-wrap:wrap;margin-left:auto}
 .bar nav button{background:none;border:1px solid rgba(243,230,196,.5);color:#f3e6c4;padding:2px 10px;border-radius:3px}
-.bar nav button[aria-current=true]{background:#f3e6c4;color:var(--ink)}
+.bar nav button[aria-current=true]{background:#f3e6c4;color:#374b48;border-color:#f3e6c4}
 .book{display:grid;grid-template-columns:1fr 1.25fr;max-width:1240px;margin:26px auto 40px;padding:0 clamp(8px,2vw,24px);position:relative;gap:0}
 @media(max-width:900px){.book{grid-template-columns:1fr;gap:18px}}
 .leaf{background:var(--tex) var(--paper);background-blend-mode:multiply;padding:clamp(20px,3vw,40px);box-shadow:0 14px 34px rgba(40,24,10,.45);position:relative;min-height:70vh;border:1px solid rgba(107,74,53,.5)}
@@ -63,7 +63,7 @@ aside.side p{margin:0 0 12px}
 .rule{height:14px;margin:8px 0 14px;background:linear-gradient(90deg,transparent,var(--umber) 20%,var(--umber) 80%,transparent) center/100% 1px no-repeat;position:relative}
 .rule::after{content:"\2766";position:absolute;left:50%;top:-4px;transform:translateX(-50%);background:var(--paper);padding:0 10px;color:var(--red);font-size:1rem;line-height:1}
 .leaf h3{font-size:1.35rem;margin:20px 0 6px;border-bottom:1px solid var(--gold)}
-.note-c{border-left:3px solid var(--red);padding:2px 0 2px 12px;margin:0 0 12px}
+.note-c{border-left:3px solid var(--red);padding:7px 10px 7px 12px;margin:0 0 12px;background:rgba(243,230,196,.35);border-radius:0 3px 3px 0}
 .note-c h4{font-size:1.1rem}.note-c p{margin:2px 0}
 .kind{display:inline-block;font-size:.8rem;font-family:var(--sc);border:1px solid var(--umber);padding:0 8px;border-radius:9px;margin-right:6px;vertical-align:1px}
 .kind.legend{border-color:var(--red);color:var(--red)}
@@ -72,7 +72,7 @@ aside.side p{margin:0 0 12px}
 ul.s{margin:0;padding-left:18px}ul.s li{margin:0 0 6px;font-size:.95rem}
 .vol{display:flex;gap:8px;flex-wrap:wrap;margin:6px 0 14px}
 .vol button{background:rgba(255,246,220,.55);border:1px solid var(--umber);padding:4px 12px;border-radius:3px}
-.vol button[aria-pressed=true]{background:var(--ink);color:#f3e6c4}
+.vol button[aria-pressed=true]{background:#405754;color:#f3e6c4}
 .reader h2{font-size:clamp(1.7rem,3.4vw,2.4rem)}
 .by{font-style:italic;color:var(--umber);margin:2px 0 8px}
 .rights{font-size:.88rem;border:1px dashed var(--umber);padding:6px 10px;margin:8px 0 14px;background:rgba(255,246,220,.5)}
@@ -86,7 +86,7 @@ body::before{box-shadow:none}
 </head>
 <body>
 <div id="home">
-  <div class="cart"><h1>SUGID</h1><p>Ang istorya sang kada lugar: a literary map of Negros Occidental</p></div>
+  <div class="cart"><h1>SUGID</h1><p>Ang Istorya Sang Kada Lugar: A Literary Map of Negros Occidental</p><p class="app-description">This website contains some local literatures and backgrounds from Silay, Talisay, Bacolod, Murcia, and Bago</p></div>
   <div class="grid">
     <div class="frame"><div class="mapbox">
       <svg id="map" viewBox="0 0 768 1152" role="group" aria-label="Map of Negros Occidental with five interactive places">
@@ -94,15 +94,13 @@ body::before{box-shadow:none}
         <g id="pins"></g>
       </svg>
       <svg class="compass" viewBox="-60 -60 120 120" aria-hidden="true"><g fill="#3a281c" stroke="#3a281c" stroke-width=".8"><path d="M0-52L7-7 52 0 7 7 0 52-7 7-52 0-7-7Z" fill="#f3e6c4"/><path d="M0-52L7-7 0 0Z M52 0L7 7 0 0Z M0 52L-7 7 0 0Z M-52 0L-7-7 0 0Z"/><path d="M0-34L4-4 34 0 4 4 0 34-4 4-34 0-4-4Z" transform="rotate(45)" fill="#f3e6c4"/><circle r="38" fill="none"/><circle r="3" fill="#8e2f24"/></g><text y="-56" text-anchor="middle" font-family="IM Fell English SC,serif" font-size="13" fill="#3a281c">N</text></svg>
-      <span class="note">Schematic chart, not to scale</span>
     </div></div>
     <aside class="side">
-      <h2>Open the atlas</h2>
-      <p>Choose a seal on the chart, or a place below. The chart zooms in and turns to that place’s page, with its name story, words, and full texts.</p>
+      <h2>Explore the map</h2>
+      <p>Choose a location marker on the map, and see the literature behind your chosen City/Municipality.</p>
       <ul class="plist" id="plist"></ul>
     </aside>
   </div>
-  <p class="foot">Pilot content for five places, from the SUGID source workbook (accessed 2026-10-25). Words and meanings still need a fluent Hiligaynon speaker’s check.</p>
 </div>
 
 <section id="page" hidden aria-label="Place page">
@@ -185,7 +183,7 @@ const W=768,H=1152,NS="http://www.w3.org/2000/svg";
 const MARKERS={silay:[462,326],talisay:[428,384],bacolod:[363,454],murcia:[533,459],bago:[353,545]};
 const svg=document.getElementById("map"),$=id=>document.getElementById(id);
 PLACES.forEach(p=>{const g=document.createElementNS(NS,"g");g.setAttribute("class","pin");g.setAttribute("tabindex","0");g.setAttribute("role","button");g.setAttribute("aria-label",p.name);
-  g.innerHTML='<rect rx="8"></rect>';p._g=g;$("pins").appendChild(g);
+  g.innerHTML='<rect rx="24"></rect>';p._g=g;$("pins").appendChild(g);
   g.onclick=()=>openPlace(p.id);g.onkeydown=e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();openPlace(p.id);}};});
 let vb={x:0,y:0,w:W,h:H};
 function setVB(v){vb=v;svg.setAttribute("viewBox",`${v.x} ${v.y} ${v.w} ${v.h}`);const k=v.w/W;
@@ -231,7 +229,7 @@ function openPlace(id,instant){
   const w=140,h=w*H/W,[x,y]=MARKERS[p.id];fly({x:x-w/2,y:y-h/2,w,h},()=>{const[x,y]=pinCenter(p);show(x,y);});
 }
 function closePlace(){if(!open)return;const x=innerWidth/2,y=innerHeight/2;
-  const fin=()=>{page.hidden=true;open=false;document.title="SUGID: Ang istorya sang kada lugar";fly({x:0,y:0,w:W,h:H});};
+  const fin=()=>{page.hidden=true;open=false;document.title="SUGID: Ang Istorya Sang Kada Lugar";fly({x:0,y:0,w:W,h:H});};
   if(!reduce&&page.animate){const a=page.animate([{clipPath:`circle(160vmax at ${x}px ${y}px)`},{clipPath:`circle(0px at ${x}px ${y}px)`}],{duration:600,easing:"ease-in"});a.onfinish=fin;}else fin();}
 $("close").onclick=()=>{if(location.hash)history.pushState(null,"",location.pathname+location.search);closePlace();};
 addEventListener("hashchange",()=>{const id=location.hash.slice(1);if(id)openPlace(id,open);else closePlace();});
